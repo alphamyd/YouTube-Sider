@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>YouTube Sider</title>
+</head>
+<body>
+
+  <menu class="menu" role="menu">
+    <li id="menu-new" role="menuitem">
+      <span class="simptip-position-bottom simptip-fade" data-tooltip="Open new video"></span>
+    </li>
+    <li id="menu-top" role="menuitem">
+      <span class="simptip-position-bottom simptip-fade" data-tooltip="Set mode: «Always on top»"></span>
+    </li>
+    <li id="menu-opacity" role="menuitem">
+      <div class="menu__sub">
+        <input id="menu-opacity-range" type="range" min="20" value="100" placeholder="Set opacity">
+        <span class="simptip-position-bottom simptip-fade" data-tooltip="Set opacity"></span>
+      </div>
+    </li>
+    <li id="menu-repeat" role="menuitem">
+      <span class="simptip-position-bottom simptip-fade" data-tooltip="Repeat video"></span>
+    </li>
+  </menu>
+
+  <main id="main" class="main" role="main">
+    <div class="main__inner">
+      <input type="text" id="YouTubeID" tabindex="0" placeholder="Paste (CTRL/CMD + V) link to YouTube video" autocomplete="off" disabled>
+      <div id="main-error" class="main__error simptip-position-top simptip-fade simptip-danger" data-tooltip="Error"></div>
+    </div>
+  </main>
+
+  <webview id="player" class="player" httpreferrer="https://youtube.com/" disablewebsecurity></webview>
+
+  <script src="./js/main.js"></script>
+
+</body>
+</html>

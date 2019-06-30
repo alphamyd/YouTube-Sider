@@ -1,0 +1,111 @@
+.menu
+  position: absolute
+  display: flex
+  width: 100%
+  top: -200px
+  left: 0
+  margin: 0
+  padding: 12px 0
+  align-items: center
+  justify-content: center
+  background-color: rgba($color-black, .5)
+  z-index: 10
+  transition: $transition-main
+  &:hover
+    background-color: rgba($color-black, .8)
+  .player--initialized:hover &
+    top: 0
+
+  &__sub
+    display: flex
+    align-items: center
+    justify-content: center
+    position: absolute
+    top: 50px
+    left: 0
+    width: 100%
+    height: 100%
+    opacity: 0
+    z-index: -1
+    visibility: hidden
+    background-color: rgba($color-black, .4)
+    transition: $transition-main 0.3s
+
+  li
+    display: block
+    position: relative
+    color: $color-white
+    padding: 0 10px
+    margin: 0 40px 0 0
+    transition: $transition-main
+    cursor: pointer
+    &.menu__item--active
+      color: $color-primary
+      //&:before
+      //  font-weight: bold
+      &:hover
+        color: $color-white
+    &:hover
+      color: $color-primary
+      .menu__sub
+        visibility: visible
+        top: 62px
+        opacity: 1
+        z-index: 5
+        transition: $transition-main
+    &:last-child
+      margin: 0
+    &:before
+      content: ""
+      font-size: 1.5rem
+      font-family: $font-icon
+
+    [data-tooltip]
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      z-index: 8
+
+
+#menu-new
+  &:before
+    content: "\f101"
+
+#menu-top
+  &:before
+    content: "\f108"
+
+#menu-opacity
+  position: static
+  &:before
+    content: "\f102"
+  &:hover
+    color: $color-primary
+
+  .platform-linux &
+    display: none // opacity doesn't work on linux-based platforms
+
+  .menu__sub
+    &:before, &:after
+      color: $color-gray
+      font-size: 0.875rem
+      font-weight: bold
+    &:before
+      content: "20%"
+      margin-right: 20px
+    &:after
+      content: "100%"
+      margin-left: 20px
+  [data-tooltip]
+    top: 10px
+
+#menu-repeat
+  &:before
+    content: "\f10c"
+
+#menu-opacity-range
+  position: relative
+  padding: 10px 0
+  z-index: 10

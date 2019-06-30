@@ -1,0 +1,78 @@
+{
+  "name": "youtube-sider",
+  "description": "YouTube Sider - watch YouTube videos without distracting from work.",
+  "version": "1.0.0",
+  "main": "electron.js",
+  "scripts": {
+    "frontend:start": "cross-env NODE_ENV=development parcel ./src/index.html --port 3000 --out-dir build",
+    "frontend:build": "cross-env NODE_ENV=production parcel build ./src/index.html --target=electron --bundle-node-modules --out-dir frontend --public-url ./",
+    "electron:start": "cross-env NODE_ENV=development electron electron.js",
+    "electron:build": "cross-env NODE_ENV=production electron-builder",
+    "electron:build:win": "yarn electron:build --windows",
+    "electron:build:mac": "yarn electron:build --mac",
+    "electron:build:linux": "yarn electron:build --linux",
+    "build": "yarn clean && yarn frontend:build && yarn electron:build",
+    "release": "yarn build --publish always",
+    "clean": "rimraf .cache build/ frontend/",
+    "start": "concurrently \"yarn frontend:start\" \"wait-on http://localhost:3000 && yarn electron:start\""
+  },
+  "homepage": "./",
+  "build": {
+    "appId": "com.youtube.sider.app.alphamyd",
+    "productName": "YouTube Sider",
+    "artifactName": "YouTube Sider.${ext}",
+    "asar": true,
+    "directories": {
+      "buildResources": "frontend",
+      "output": "build"
+    },
+    "files": [
+      "./src/js/player.js",
+      "./src/assets/**/*",
+      "./frontend/**/*",
+      "./electron.js"
+    ],
+    "mac": {
+      "target": "dmg",
+      "icon": "./src/assets/logo.icns",
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "./src/assets/logo.ico"
+    },
+    "nsis": {
+      "license": "LICENSE",
+      "installerIcon": "./src/assets/logo.ico",
+      "installerHeaderIcon": "./src/assets/logo.ico",
+      "uninstallerIcon": "./src/assets/logo.ico",
+      "allowToChangeInstallationDirectory": false,
+      "deleteAppDataOnUninstall": true,
+      "createDesktopShortcut": true
+    },
+    "linux": {
+      "target": "deb",
+      "category": "Utility",
+      "packageCategory": "Utility"
+    }
+  },
+  "repository": "https://github.com/alphamyd/YouTube-Sider.git",
+  "author": "alphamyd <alphamyd@gmail.com>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "node-normalize-scss": "^8.0.0",
+    "sass": "^1.22.0",
+    "simptip": "^1.0.4"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "electron": "^5.0.6",
+    "electron-builder": "^20.44.4",
+    "node-sass": "^4.12.0",
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-wrapper": "^0.2.2",
+    "rimraf": "^2.6.3",
+    "wait-on": "^3.2.0"
+  }
+}
